@@ -1,10 +1,17 @@
-const pullAtValue = (arr, pullArr) => {
-  let removed = [],
-    pushToRemove = arr.forEach((v, i) =>
-      pullArr.includes(v) ? removed.push(v) : v,
-    ),
-    mutateTo = arr.filter((v, i) => !pullArr.includes(v));
-  arr.length = 0;
-  mutateTo.forEach((v) => arr.push(v));
-  return removed;
-};
+function rotateRight(head, k) {
+  if (!head || k === 0) return head;
+  let length = 1;
+  let tail = head;
+  while (tail.next) {
+    length++;
+    tail = tail.next;
+  }
+  k = k % length;
+  if (k === 0) return head;
+  let newTail = head;
+  for (let i = 1; i < length - k; i++) newTail = newTail.next;
+  const newHead = newTail.next;
+  newTail.next = null;
+  tail.next = head;
+  return newHead;
+}
